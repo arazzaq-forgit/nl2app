@@ -1,1 +1,9 @@
-
+venv/
+.env
+__pycache__/
+*.pyc
+*.db
+*.sqlite
+/tmp/
+eval/eval_results.json
+eval/eval_report.md
