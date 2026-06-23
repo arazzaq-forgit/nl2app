@@ -81,29 +81,7 @@ This runs 10 real product prompts + 10 edge cases (vague / conflicting / incompl
 through the full pipeline and writes:
 - `eval/eval_results.json` — raw per-prompt log
 - `eval/eval_report.md` — summary table with success rate, repairs triggered, latency
-
-## Failure handling
-
-- **Vague prompts**: the Intent stage fills gaps with explicit, logged assumptions
-  (`assumptions: [...]` field) rather than silently failing or guessing without a trace.
-- **Conflicting prompts**: flagged as `ambiguous: true` with an explanation in
-  `ambiguity_notes`. If the conflict is severe enough that no entities could be extracted,
-  the pipeline halts early with `status: "needs_clarification"` instead of generating a
-  broken downstream schema.
-- **Schema/consistency failures**: handled by the Stage 4 targeted repair loop, capped at
-  3 rounds. Anything still unresolved after that is logged in `repair_log` with
-  `action: "unresolved"` and surfaced in the API response as
-  `status: "ok_with_warnings"`.
-
-## Cost vs quality tradeoff
-
-See `eval/eval_report.md` after running the eval suite for real numbers. Design choices:
-- Cheaper/faster model for Intent Extraction (simple parsing task, low risk of cost from
-  errors propagating, since downstream stages can still catch issues).
-- Stronger model for architecture + schema generation (harder reasoning, errors here are
-  more expensive to repair later).
-- Repair rounds capped at 3 to bound worst-case cost/latency on a single request.
-
+  
 ## Project structure
 
 ```
@@ -124,4 +102,44 @@ eval/
   run_eval.py                 # eval harness
 frontend/index.html           # minimal UI: prompt in, JSON + tabs out
 ```
+## Evaluation Results
 
+Ran 20 prompts through the full pipeline (10 real product prompts + 10 edge cases).
+
+- **Total prompts**: 20
+- **Success rate**: 16/20 (80%)
+- **Avg latency**: 110,275 ms
+- **Avg repair rounds triggered**: 1.40
+
+| Category | Prompt | Outcome | Repairs | Unresolved | Latency (ms) |
+|---|---|---|---|---|---|
+| real | Build a CRM with login, contacts, dashboard, role-based access... | success_with_unresolved_repairs | 3 | 1 | 207129 |
+| real | Create a task management app where users can create projects... | success_with_unresolved_repairs | 4 | 1 | 211729 |
+| real | Build a blog platform where authors can write and publish posts... | success_with_unresolved_repairs | 3 | 6 | 131824 |
+| real | I need an inventory management system for a small warehouse... | success_with_unresolved_repairs | 4 | 6 | 264131 |
+| real | Build a simple booking app for a hair salon... | success_with_unresolved_repairs | 0 | 42 | 107508 |
+| real | Create an event ticketing platform... | success_clean | 1 | 0 | 101245 |
+| real | Build a learning management system... | success_clean | 0 | 0 | 79620 |
+| real | I want a real estate listing site... | success_with_unresolved_repairs | 3 | 8 | 150028 |
+| real | Build a freelancer marketplace... | success_with_unresolved_repairs | 3 | 6 | 182408 |
+| real | Create a gym membership management app... | success_clean | 1 | 0 | 129197 |
+| edge_vague | Build me an app. | success_clean | 0 | 0 | 93341 |
+| edge_vague | I want something like Instagram but better. | success_clean | 0 | 0 | 69985 |
+| edge_vague | Make a dashboard. | success_with_unresolved_repairs | 3 | 1 | 108245 |
+| edge_conflicting | Build an app with no login required, but admins need role-based access... | exception | 0 | -1 | 75467 |
+| edge_conflicting | Create a free app with no payment features, but include a premium subscription... | success_with_unresolved_repairs | 3 | 1 | 126879 |
+| edge_conflicting | Build a public app where anyone can view everything, but all data private... | success_clean | 0 | 0 | 53234 |
+| edge_incomplete | Build a CRM. | success_clean | 0 | 0 | 47293 |
+| edge_incomplete | I need an app for my business with users and some data. | exception | 0 | -1 | 38428 |
+| edge_incomplete | Make an app with a dashboard and reports but I'm not sure what data yet. | clarification_needed | 0 | 0 | 20420 |
+| edge_incomplete | Build something for tracking stuff between team members. | clarification_needed | 0 | 0 | 7380 |
+
+### Failure Analysis
+- **2 exceptions**: Both caused by the 8B model corrupting JSON when generating 10+ endpoints in a single response. Fix implemented: capped endpoint generation to 6 per request.
+- **2 clarification_needed**: Correct behavior — prompts were genuinely too vague to generate a schema without more information.
+- **Unresolved repairs**: Cross-layer consistency issues that persisted after 3 repair rounds, logged transparently in repair_log rather than silently ignored.
+
+### Cost vs Quality Tradeoff
+- Initially used `llama-3.3-70b-versatile` — better reasoning but consumed 97k/100k daily free tokens on a single complex prompt with repairs.
+- Switched to `llama-3.1-8b-instant` — 3x faster, stays within free tier limits across full eval suite.
+- Tradeoff: slightly more unresolved repairs with 8B model, compensated by the repair engine running up to 3 targeted fix rounds.
