@@ -156,24 +156,42 @@ Ran 20 prompts (10 real product prompts + 10 edge cases: vague, conflicting, inc
 - **Conflicting prompts**: flagged as `ambiguous: true` with explanation in `ambiguity_notes`
 - **Unresolvable**: returns `status: needs_clarification` instead of generating broken schema
 
-## Project Structure
-app/
+## 📁 Project Structure
 
-schemas/models.py          # Pydantic contracts for every stage
-
-pipeline/
-
-llm_client.py            # structured-output wrapper with validation retry
-
-stage1_intent.py         # Stage 1: Intent Extraction
-
-stage2_architecture.py   # Stage 2: System Design
-
-stage3_schemas.py        # Stage 3: UI/API/DB/Auth sub-stages
-
-stage4_refine.py         # Stage 4: targeted repair
-
-orchestrator.py          # wires all stages together
+```
+nl2app/
+│
+├── 🧠 app/
+│   │
+│   ├── 🔄 pipeline/
+│   │   ├── llm_client.py          # LLM wrapper — validation + rate-limit retry
+│   │   ├── stage1_intent.py       # Stage 1 — Natural language → Intent
+│   │   ├── stage2_architecture.py # Stage 2 — Intent → Architecture
+│   │   ├── stage3_schemas.py      # Stage 3 — UI / API / DB / Auth schemas
+│   │   ├── stage4_refine.py       # Stage 4 — Targeted repair engine
+│   │   └── orchestrator.py        # Wires all 4 stages together
+│   │
+│   ├── 📐 schemas/
+│   │   └── models.py              # Pydantic contracts for every stage
+│   │
+│   ├── ✅ validators/
+│   │   └── consistency.py         # Deterministic cross-layer checker (no LLM)
+│   │
+│   ├── ⚙️ execution/
+│   │   └── executor.py            # SQLite + FastAPI routes + HTML preview
+│   │
+│   └── 🚀 main.py                 # FastAPI server — /generate endpoint
+│
+├── 📊 eval/
+│   ├── dataset.json               # 20 test prompts (10 real + 10 edge cases)
+│   └── run_eval.py                # Evaluation harness — metrics + reporting
+│
+├── 🌐 frontend/
+│   └── index.html                 # Single page UI — prompt in, JSON out
+│
+├── 📋 requirements.txt
+└── 🔑 .env.example
+```tor.py          # wires all stages together
 
 validators/consistency.py  # deterministic cross-layer checker
 
