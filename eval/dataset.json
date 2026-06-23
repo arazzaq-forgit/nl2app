@@ -1,0 +1,32 @@
+{
+  "real_prompts": [
+    "Build a CRM with login, contacts, dashboard, role-based access, and a premium plan with payments. Admins can see analytics.",
+    "Create a task management app where users can create projects, add tasks with deadlines, assign tasks to teammates, and managers can see team progress.",
+    "Build a blog platform where authors can write and publish posts, readers can comment, and admins can moderate comments.",
+    "I need an inventory management system for a small warehouse: track products, stock levels, suppliers, and let managers generate low-stock reports.",
+    "Build a simple booking app for a hair salon: customers book appointments, stylists see their schedule, owner sees revenue reports.",
+    "Create an event ticketing platform: organizers create events, attendees buy tickets, and there's a premium tier for organizers with advanced analytics.",
+    "Build a learning management system with courses, lessons, student enrollment, instructor course creation, and admin oversight of all courses.",
+    "I want a real estate listing site: agents post property listings, buyers can save favorites and contact agents, admin approves new listings.",
+    "Build a freelancer marketplace: freelancers create profiles and gigs, clients post jobs and hire freelancers, admin handles disputes.",
+    "Create a gym membership management app: members book classes, trainers manage their class schedules, admin manages memberships and payments."
+  ],
+  "edge_cases": {
+    "vague": [
+      "Build me an app.",
+      "I want something like Instagram but better.",
+      "Make a dashboard."
+    ],
+    "conflicting": [
+      "Build an app with no login required, but admins need role-based access control to manage other users.",
+      "Create a free app with no payment features, but include a premium subscription tier with Stripe payments.",
+      "Build a public app where anyone can view everything, but also make all data private and only visible to the owner."
+    ],
+    "incomplete": [
+      "Build a CRM.",
+      "I need an app for my business with users and some data.",
+      "Make an app with a dashboard and reports but I'm not sure what data yet.",
+      "Build something for tracking stuff between team members."
+    ]
+  }
+}

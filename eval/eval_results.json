@@ -1,0 +1,164 @@
+[
+  {
+    "category": "real",
+    "prompt": "Build a CRM with login, contacts, dashboard, role-based acce",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 1,
+    "latency_ms": 207129.4
+  },
+  {
+    "category": "real",
+    "prompt": "Create a task management app where users can create projects",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 4,
+    "unresolved_issues": 1,
+    "latency_ms": 211729.0
+  },
+  {
+    "category": "real",
+    "prompt": "Build a blog platform where authors can write and publish po",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 6,
+    "latency_ms": 131824.4
+  },
+  {
+    "category": "real",
+    "prompt": "I need an inventory management system for a small warehouse:",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 4,
+    "unresolved_issues": 6,
+    "latency_ms": 264131.6
+  },
+  {
+    "category": "real",
+    "prompt": "Build a simple booking app for a hair salon: customers book ",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 0,
+    "unresolved_issues": 42,
+    "latency_ms": 107508.9
+  },
+  {
+    "category": "real",
+    "prompt": "Create an event ticketing platform: organizers create events",
+    "outcome": "success_clean",
+    "repairs_triggered": 1,
+    "unresolved_issues": 0,
+    "latency_ms": 101245.0
+  },
+  {
+    "category": "real",
+    "prompt": "Build a learning management system with courses, lessons, st",
+    "outcome": "success_clean",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 79620.7
+  },
+  {
+    "category": "real",
+    "prompt": "I want a real estate listing site: agents post property list",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 8,
+    "latency_ms": 150028.9
+  },
+  {
+    "category": "real",
+    "prompt": "Build a freelancer marketplace: freelancers create profiles ",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 6,
+    "latency_ms": 182408.0
+  },
+  {
+    "category": "real",
+    "prompt": "Create a gym membership management app: members book classes",
+    "outcome": "success_clean",
+    "repairs_triggered": 1,
+    "unresolved_issues": 0,
+    "latency_ms": 129197.4
+  },
+  {
+    "category": "edge_vague",
+    "prompt": "Build me an app.",
+    "outcome": "success_clean",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 93341.6
+  },
+  {
+    "category": "edge_vague",
+    "prompt": "I want something like Instagram but better.",
+    "outcome": "success_clean",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 69985.6
+  },
+  {
+    "category": "edge_vague",
+    "prompt": "Make a dashboard.",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 1,
+    "latency_ms": 108245.0
+  },
+  {
+    "category": "edge_conflicting",
+    "prompt": "Build an app with no login required, but admins need role-ba",
+    "outcome": "exception",
+    "repairs_triggered": 0,
+    "unresolved_issues": -1,
+    "latency_ms": 75467.5,
+    "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\\n  \"endpoints\":[\\n      {\\n         \"id\":\"list_admins\",\\n         \"path\":\"/admins\",\\n         \"method\":\"GET\",\\n         \"entity\":\"Admin\",\\n         \"request_fields\":[\\n\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"password\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"list_users\",\\n         \"path\":\"/users\",\\n         \"method\":\"GET\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[\\n\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"user\",\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"create_admin\",\\n         \"path\":\"/admins\",\\n         \"method\":\"POST\",\\n         \"entity\":\"Admin\",\\n         \"request_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"password\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"create_user\",\\n         \"path\":\"/users\",\\n         \"method\":\"POST\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"user\",\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"update_admin\",\\n         \"path\":\"/admins\",\\n         \"method\":\"PUT\",\\n         \"entity\":\"Admin\",\\n         \"request_fields\":[\\n\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"password\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"update_user\",\\n         \"path\":\"/users\",\\n         \"method\":\"PUT\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":false}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":false}\\n         ],\\n         \"roles_allowed\":[\\n            \"user\",\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"delete_admin\",\\n         \"path\":\"/admins\",\\n         \"method\":\"DELETE\",\\n         \"entity\":\"Admin\",\\n         \"request_fields\":[\\n\\n         ],\\n         \"response_fields\":[\\n\\n         ],\\n         \"roles_allowed\":[\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"delete_user\",\\n         \"path\":\"/users\",\\n         \"method\":\"DELETE\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[\\n\\n         ],\\n         \"response_fields\":[\\n\\n         ],\\n         \"roles_allowed\":[\\n            \"user\",\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"login_admin\",\\n         \"path\":\"/admins/login\",\\n         \"method\":\"POST\",\\n         \"entity\":\"Admin\",\\n         \"request_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"password\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"token\",\"type\":\"string\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\\n            \"admin\"\\n         ]\\n      },\\n      {\\n         \"id\":\"login_user\",\\n         \"path\"]/users/login\",\\\\n         \"method\":\"POST\",\\\\n         \"entity\":\"User\",\\\\n         \"request_fields\":[\\\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\\\n            {\"name\":\"password\",\"type\":\"string\",\"required\":true}\\\\n         ],\\\\n         \"response_fields\":[\\\\n            {\"name\":\"token\",\"type\":\"string\",\"required\":true}\\\\n         ],\\\\n         \"roles_allowed\":[\\\\n            \"user\",\\\\n            \"admin\"\\\\n         ]\\\\n      }\\\\n   ]\\\\n}'}}"
+  },
+  {
+    "category": "edge_conflicting",
+    "prompt": "Create a free app with no payment features, but include a pr",
+    "outcome": "success_with_unresolved_repairs",
+    "repairs_triggered": 3,
+    "unresolved_issues": 1,
+    "latency_ms": 126879.7
+  },
+  {
+    "category": "edge_conflicting",
+    "prompt": "Build a public app where anyone can view everything, but als",
+    "outcome": "success_clean",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 53234.9
+  },
+  {
+    "category": "edge_incomplete",
+    "prompt": "Build a CRM.",
+    "outcome": "success_clean",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 47293.4
+  },
+  {
+    "category": "edge_incomplete",
+    "prompt": "I need an app for my business with users and some data.",
+    "outcome": "exception",
+    "repairs_triggered": 0,
+    "unresolved_issues": -1,
+    "latency_ms": 38428.1,
+    "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '{\\n  \"endpoints\":[\\n      {\\n         \"id\":\"get_users\",\\n         \"path\":\"/users\",\\n         \"method\":\"GET\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[],\\n\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":false},\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"created_at\",\"type\":\"date\",\"required\":false}\\n         ],\\n         \"roles_allowed\":[\"admin\",\"user\"]\\n      },\\n      {\\n         \"id\":\"create_user\",\\n         \"path\":\"/users\",\\n         \"method\":\"POST\",\\n         \"entity\":\"User\",\\n         \"request_fields\":[\\n            {\"name\":\"username\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"role\",\"type\":\"enum\",\"required\":true},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"created_at\",\"type\":\"date\",\"required\":false}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\"admin\"]\\n      },\\n      {\\n         \"id\":\"get_contacts\",\\n         \"path\":\"/contacts\",\\n         \"method\":\"GET\",\\n         \"entity\":\"Contact\",\\n         \"request_fields\":[],\\n\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":false},\\n            {\"name\":\"name\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":false},\\n            {\"name\":\"owner\",\"type\":\"relation\",\"required\":false},\\n            {\"name\":\"created_at\",\"type\":\"date\",\"required\":false}\\n         ],\\n         \"roles_allowed\":[\"admin\",\"user\"]\\n      },\\n      {\\n         \"id\":\"create_contact\",\\n         \"path\":\"/contacts\",\\n         \"method\":\"POST\",\\n         \"entity\":\"Contact\",\\n         \"request_fields\":[\\n            {\"name\":\"name\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"email\",\"type\":\"string\",\"required\":true},\\n            {\"name\":\"owner\",\"type\":\"relation\",\"required\":false}\\n         ],\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":true}\\n         ],\\n         \"roles_allowed\":[\"admin\"]\\n      },\\n      {\\n         \"id\":\"get_analytics\",\\n         \"path\":\"/analytics\",\\n         \"method\":\"GET\",\\n         \"entity\":\"Analytics\",\\n         \"request_fields\",\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":false},\\n            {\"name\":\"users\",\"type\":\"number\",\"required\":false},\\n            {\"name\":\"data\",\"type\":\"string\",\"required\":false}\\n         ],\\n         \"roles_allowed\":[\"admin\"]\\n      },\\n      {\\n         \"id\":\"get_dashboard\",\\n         \"path\":\"/dashboard\",\\n         \"method\":\"GET\",\\n         \"entity\":\"Dashboard\",\\n         \"request_fields\",\\n         \"response_fields\":[\\n            {\"name\":\"id\",\"type\":\"number\",\"required\":false},\\n            {\"name\":\"data\",\"type\":\"string\",\"required\":false}\\n         ],\\n         \"roles_allowed\":[\"admin\"]\\n      }\\n   ]\\n}'}}"
+  },
+  {
+    "category": "edge_incomplete",
+    "prompt": "Make an app with a dashboard and reports but I'm not sure wh",
+    "outcome": "clarification_needed",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 20420.7
+  },
+  {
+    "category": "edge_incomplete",
+    "prompt": "Build something for tracking stuff between team members.",
+    "outcome": "clarification_needed",
+    "repairs_triggered": 0,
+    "unresolved_issues": 0,
+    "latency_ms": 7380.6
+  }
+]
