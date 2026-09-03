@@ -1,4 +1,4 @@
-# NL → App Config Compiler
+# NL → App Config Compiler 
 
 A multi-stage pipeline that compiles a natural-language app description into a strict,
 validated, cross-consistent, and **executable** application configuration — UI schema,
